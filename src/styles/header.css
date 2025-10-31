@@ -1,0 +1,21 @@
+header {
+    text-align: center;
+    background-color: var(--header-bg);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+}
+
+header h1 {
+    margin: 0 0 10px 0;
+    color: var(--primary-color);
+}
+
+header p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #555;
+}
+

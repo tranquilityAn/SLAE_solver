@@ -1,0 +1,46 @@
+.matrix-grid-container {
+    overflow-x: auto;
+}
+
+.matrix-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+    font-size: 1.2rem;
+}
+
+.matrix-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.matrix-cell-input {
+    width: 60px;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1.1rem;
+    text-align: center;
+    background-color: var(--input-bg);
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.matrix-label {
+    color: #555;
+}
+
+.matrix-brace {
+    font-size: 3rem;
+    font-weight: 100;
+    color: #777;
+    padding-right: 10px;
+    line-height: 1;
+}
+
+.vector-cell {
+    background-color: #e6f7ff;
+}
+

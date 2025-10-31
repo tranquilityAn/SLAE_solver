@@ -1,0 +1,22 @@
+.size-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.size-control label {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.size-control input {
+    width: 80px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    font-size: 1.1rem;
+    font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+}
+
