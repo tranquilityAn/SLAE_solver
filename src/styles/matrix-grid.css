@@ -4,10 +4,10 @@
 
 .matrix-grid {
     display: flex;
-    flex-direction: column;
     gap: 10px;
     font-family: "SF Mono", "Fira Code", "Consolas", monospace;
     font-size: 1.2rem;
+    align-items: stretch;
 }
 
 .matrix-row {
@@ -32,15 +32,22 @@
     color: #555;
 }
 
-.matrix-brace {
-    font-size: 3rem;
-    font-weight: 100;
-    color: #777;
-    padding-right: 10px;
-    line-height: 1;
-}
-
 .vector-cell {
     background-color: #e6f7ff;
 }
 
+.brace-col {
+    width: 22px;
+    flex: 0 0 22px;
+    display: flex;
+}
+.brace-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.rows {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}

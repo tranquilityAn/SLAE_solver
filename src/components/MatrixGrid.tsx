@@ -1,5 +1,6 @@
 import React from "react";
 import { useGridNavigation } from "../hooks/useGridNavigation.ts";
+import CurlyBrace from "./CurlyBrace.tsx";
 import "../styles/matrix-grid.css";
 
 type Props = {
@@ -92,47 +93,55 @@ export default function MatrixGrid({ n, A, B, setA, setB }: Props) {
                 className="matrix-grid"
                 style={{ "--n": n } as React.CSSProperties}
             >
-                {A.map((row, r) => (
-                    <div className="matrix-row" key={`row-${r}`}>
-                        <span className="matrix-brace">
-                            {r === 0 ? "{" : ""}
-                        </span>
-                        {row.map((cell, c) => (
-                            <React.Fragment key={`cell-${r}-${c}`}>
-                                <input
-                                    className="matrix-cell-input"
-                                    type="text"
-                                    value={cell}
-                                    onChange={(e) =>
-                                        onAChange(r, c, e.target.value)
-                                    }
-                                    onKeyDown={(e) => handleKeyDown(e, r, c)}
-                                    onFocus={() => onAFocus(r, c)}
-                                    onBlur={() => onABlur(r, c)}
-                                    ref={(el) => setRef(r, c, el)}
-                                    aria-label={`Matrix A element ${r + 1},${
-                                        c + 1
-                                    }`}
-                                />
-                                <span className="matrix-label">
-                                    x<sub>{c + 1}</sub> {c < n - 1 ? "+" : ""}
-                                </span>
-                            </React.Fragment>
-                        ))}
-                        <span className="matrix-label">=</span>
-                        <input
-                            type="text"
-                            className="matrix-cell-input vector-cell"
-                            value={B[r]}
-                            onChange={(e) => onBChange(r, e.target.value)}
-                            onKeyDown={(e) => handleKeyDown(e, r, n)}
-                            onFocus={() => onBFocus(r)}
-                            onBlur={() => onBBlur(r)}
-                            ref={(el) => setRef(r, n, el)}
-                            aria-label={`Vector B element ${r + 1}`}
-                        />
-                    </div>
-                ))}
+                <div className="brace-col">
+                    <CurlyBrace className="brace-svg" />
+                </div>
+
+                <div className="rows">
+                    {A.map((row, r) => (
+                        <div className="matrix-row" key={`row-${r}`}>
+                            {row.map((cell, c) => (
+                                <React.Fragment key={`cell-${r}-${c}`}>
+                                    <input
+                                        className="matrix-cell-input"
+                                        type="text"
+                                        value={cell}
+                                        onChange={(e) =>
+                                            onAChange(r, c, e.target.value)
+                                        }
+                                        onKeyDown={(e) =>
+                                            handleKeyDown(e, r, c)
+                                        }
+                                        onFocus={() => onAFocus(r, c)}
+                                        onBlur={() => onABlur(r, c)}
+                                        ref={(el) => setRef(r, c, el)}
+                                        aria-label={`Matrix A element ${
+                                            r + 1
+                                        },${c + 1}`}
+                                    />
+                                    <span className="matrix-label">
+                                        x<sub>{c + 1}</sub>{" "}
+                                        {c < n - 1 ? "+" : ""}
+                                    </span>
+                                </React.Fragment>
+                            ))}
+
+                            <span className="matrix-label">=</span>
+
+                            <input
+                                type="text"
+                                className="matrix-cell-input vector-cell"
+                                value={B[r]}
+                                onChange={(e) => onBChange(r, e.target.value)}
+                                onKeyDown={(e) => handleKeyDown(e, r, n)}
+                                onFocus={() => onBFocus(r)}
+                                onBlur={() => onBBlur(r)}
+                                ref={(el) => setRef(r, n, el)}
+                                aria-label={`Vector B element ${r + 1}`}
+                            />
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );
