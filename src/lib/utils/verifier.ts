@@ -14,22 +14,44 @@ export function verifySolution(
         return false;
     }
 
-    // сalculate B_prime = A * X
-    const B_prime: Vector = new Array(n).fill(0);
+    // reject non-numerical or infinite
+    for (let i = 0; i < n; i++) {
+        if (!Number.isFinite(X[i])) {
+            console.warn(`Invalid solution component X[${i}] = ${X[i]}`);
+            return false;
+        }
+    }
 
+    // calc B
     for (let i = 0; i < n; i++) {
         let sum = 0;
         for (let j = 0; j < n; j++) {
-            sum += A[i][j] * X[j];
+            const a = A[i][j];
+            if (!Number.isFinite(a)) {
+                console.error(`Invalid matrix element A[${i}][${j}] = ${a}`);
+                return false;
+            }
+            sum += a * X[j];
         }
-        B_prime[i] = sum;
-    }
 
-    // сompare B_prime with B
-    for (let i = 0; i < n; i++) {
-        if (Math.abs(B_prime[i] - B[i]) > epsilon) {
+        if (!Number.isFinite(sum)) {
+            console.warn(`Non-finite B'[${i}] computed = ${sum}`);
+            return false;
+        }
+
+        const diff = Math.abs(sum - B[i]);
+
+        if (!Number.isFinite(diff)) {
             console.warn(
-                `Verification failed at index ${i}: expected ${B[i]}, but got ${B_prime[i]}`
+                `Non-finite residual at index ${i}: |${sum} - ${B[i]}|`
+            );
+            return false;
+        }
+
+        // accuracy
+        if (diff > epsilon) {
+            console.warn(
+                `Verification failed at index ${i}: expected ${B[i]}, got ${sum} (diff=${diff})`
             );
             return false;
         }

@@ -1,5 +1,5 @@
 import type { Matrix, Vector } from "../types";
-import { checkDiagonalDominance } from "../utils/checkDiagonalDominance";
+import { checkDiagonalDominance } from "../utils/checkDiagonalDominance.ts";
 
 export function solveWithSeidel(
     A: Matrix,
