@@ -5,6 +5,7 @@
 .matrix-grid {
     display: flex;
     gap: 10px;
+    margin: 2px;
     font-family: "SF Mono", "Fira Code", "Consolas", monospace;
     font-size: 1.2rem;
     align-items: stretch;

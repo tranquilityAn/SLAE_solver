@@ -125,6 +125,20 @@ export default function App() {
                 [...Bb]
             ); // protect from mutation
             const t1 = performance.now();
+            if (!Array.isArray(X) || X.some((v) => !Number.isFinite(v))) {
+                setOutput(
+                    [
+                        `--- ${methods[method].name} ---`,
+                        "The method cannot be applied to this system because:",
+                        "- the matrix is not diagonally dominant, or",
+                        "- it has zero/small diagonal elements, or",
+                        "- the iterations diverge.",
+                        "",
+                        "Try another method.",
+                    ].join("\n")
+                );
+                return;
+            }
             const ok = verifySolution(Am, Bb, X);
             const sol = X.map((x, i) => `x${i + 1} = ${x.toPrecision(5)}`).join(
                 "\n"
@@ -137,7 +151,13 @@ export default function App() {
                 }\nTime taken: ${(t1 - t0).toFixed(2)} ms`
             );
         } catch (err: any) {
-            setOutput(`Error: ${err.message}`);
+            setOutput(
+                [
+                    `--- ${methods[method].name} ---`,
+                    "The method cannot be applied:",
+                    err?.message ?? "Unknown calculation error.",
+                ].join("\n")
+            );
         }
     };
 
