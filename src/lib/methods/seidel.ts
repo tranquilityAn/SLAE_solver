@@ -45,6 +45,6 @@ export function solveWithSeidel(
     }
 
     throw new Error(
-        `Siedel's method failed to converge within ${maxIterations} iterations`
+        `Seidel's method failed to converge within ${maxIterations} iterations`
     );
 }

@@ -7,7 +7,7 @@ export function solveWithCramer(A: Matrix, B: Vector): Vector {
     // check for dimension
     if (n > 4) {
         throw new Error(
-            `Cramers's method not reccomended for n > 4. Current dimension: ${n}`
+            `Cramer's method not reccommended for n > 4. Current dimension: ${n}`
         );
     }
 

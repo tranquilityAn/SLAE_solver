@@ -1,10 +1,5 @@
 import type { Matrix, Vector } from "../types.ts";
 
-/**
- * Parses the raw string input from textareas into a matrix (A) and a vector (B).
- * Assumes A's rows are on new lines, values separated by space.
- * Assumes B's values are on new lines.
- */
 export function parseKeyboardInput(
     matrixText: string,
     vectorText: string

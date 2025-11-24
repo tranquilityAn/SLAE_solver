@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./styles/global.css";
-//import "./App.css"
 import type { Matrix, Vector } from "./lib/types";
 import { verifySolution } from "./lib/utils/verifier";
 import { parseFileInput } from "./lib/utils/parser";
@@ -146,9 +145,7 @@ export default function App() {
             setOutput(
                 `--- ${
                     methods[method].name
-                } ---\nSolution (X):\n${sol}\n\nVerification: ${
-                    ok ? "✅ Correct" : "❌ Incorrect"
-                }\nTime taken: ${(t1 - t0).toFixed(2)} ms`
+                } ---\nSolution (X):\n${sol}`
             );
         } catch (err: any) {
             setOutput(
