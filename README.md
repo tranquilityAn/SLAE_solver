@@ -1,73 +1,51 @@
-# React + TypeScript + Vite
+# SLAE Solver (React + TypeScript)
+A small web app for solving **Systems of Linear Algebraic Equations (SLAE)** using classic numerical methods.
+![main UI](image.png)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Features
+- Choose a solving method:
+  - Gauss (partial pivoting)
+  - Gauss–Jordan (partial pivoting)
+  - Cramer's method *(recommended only for n ≤ 4)*
+  - Jacobi *(iterative)*
+  - Seidel / Gauss–Seidel *(iterative)*
+- Edit matrix **A** and vector **B** in a grid input.
+- Arrow-key navigation inside the grid.
+- Load system from a `.txt` file.
+- Prints the solution vector **X** and validates it (checks `A·X ≈ B`).
 
-Currently, two official plugins are available:
+## Input formats
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Manual input
+Fill the grid for matrix **A** and vector **B**.
 
-## React Compiler
+### File input
+Text file format:
+- Line 1: `n`
+- Next `n` lines: `n+1` numbers per line (augmented matrix `[A | B]`)
+Example (`n = 3`):
+```3
+2 1 -1 8
+-3 -1 2 -11
+-2 1 2 -3
+```
+## Notes / Limitations
+- `n` is limited in the UI (max 12).
+- Jacobi / Seidel may not converge if the matrix is not diagonally dominant (the app warns and may fail).
+- Cramer's method is restricted to small systems (n > 4 throws an error).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
+- React 19 + TypeScript
+- Vite
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Run locally
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Build
+```bash
+npm run build
+npm run preview
 ```

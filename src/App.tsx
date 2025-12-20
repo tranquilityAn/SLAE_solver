@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./styles/global.css";
 import type { Matrix, Vector } from "./lib/types";
-import { verifySolution } from "./lib/utils/verifier";
 import { parseFileInput } from "./lib/utils/parser";
 
 import Header from "./components/Header";
@@ -118,12 +117,10 @@ export default function App() {
 
         try {
             const solve = methods[method].solve;
-            const t0 = performance.now();
             const X = solve(
                 Am.map((r) => [...r]),
                 [...Bb]
             ); // protect from mutation
-            const t1 = performance.now();
             if (!Array.isArray(X) || X.some((v) => !Number.isFinite(v))) {
                 setOutput(
                     [
@@ -138,7 +135,6 @@ export default function App() {
                 );
                 return;
             }
-            const ok = verifySolution(Am, Bb, X);
             const sol = X.map((x, i) => `x${i + 1} = ${x.toPrecision(5)}`).join(
                 "\n"
             );
